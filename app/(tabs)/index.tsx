@@ -7,11 +7,12 @@ import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
   return (
+    
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
+          source={require('@/assets/images/linkedinkuva.jpeg')}
           style={styles.reactLogo}
         />
       }>
@@ -22,7 +23,7 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
+          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see muutokset.
           Press{' '}
           <ThemedText type="defaultSemiBold">
             {Platform.select({
@@ -65,10 +66,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain',
   },
 });
