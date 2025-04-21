@@ -4,6 +4,7 @@
     "slug": "tahoo-native",
     "version": "1.0.0",
     "orientation": "portrait",
+    "main": "app/start.tsx",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
@@ -19,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.semitaho.tahoonative"
     },
     "web": {
       "bundler": "metro",

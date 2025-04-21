@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { database } from "./../app/firebase.config";
 import {
   DatabaseReference,
   limitToLast,
-  onDisconnect,
+  get,
   onValue,
   orderByChild,
   push,
@@ -22,7 +22,6 @@ export const useData = () => {
     const gameRef = ref(database, "tictactoe/games");
     const unsubscribe = onValue(gameRef, (snapshot) => {
       const state = snapshot.val();
-      console.log("Game state updated:", state);
       setData(state);
     });
     return () => unsubscribe();
@@ -31,13 +30,13 @@ export const useData = () => {
 };
 
 export const useAvailableGame = (): string => {
-  const [game, setGame]= useState<string>("");
+  const [game, setGame] = useState<string>("");
   useEffect(() => {
     const gameRef = ref(database, "tictactoe/games");
     const latest = query(gameRef, orderByChild("updated desc"), limitToLast(1));
     const unsubscribe = onValue(latest, (snapshot) => {
       const state = snapshot.val();
-      console.log("Game state updated:", state);
+      console.log("Game state refreshed:", state);
       const games = Object.keys(state);
       setGame(games[0]);
     });
@@ -46,6 +45,25 @@ export const useAvailableGame = (): string => {
   return game;
 };
 
+export const getGame = (gameRef: string): Promise<GameState> => {
+  const gameRefPromise = ref(database, "tictactoe/games/" + gameRef);
+  return get(gameRefPromise).then((snapshot) => {
+    const state = snapshot.val();
+    console.log("Game state acquired:", state);
+    return state;
+  });
+};
+
+export const updateGame = (gameRef: string, gameState: GameState): Promise<GameState> => {
+  const gameRefPromise = ref(database, "tictactoe/games/" + gameRef);
+  return set(gameRefPromise, gameState).then(() => {
+    console.log("Game updated successfully, id: " + gameRef);
+    return gameState;
+  });
+};
+  
+
+
 export const create = (gameState: GameState): Promise<string> => {
   const gameRef = ref(database, "tictactoe/games");
   const newGameRef = push(gameRef);
@@ -53,7 +71,4 @@ export const create = (gameState: GameState): Promise<string> => {
     console.log("Game created successfully, id: " + newGameRef.key);
     return newGameRef.key as string;
   });
-}
-
-
-
+};

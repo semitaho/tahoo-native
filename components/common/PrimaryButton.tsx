@@ -8,17 +8,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'blue',
     padding: 7,
-    marginTop: 10
+    flexDirection: 'row',
+    marginTop: 10,
+    width: '80%',
+
+
+  },
+
+  buttoncontainerdisabled: {
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'gray',
+    padding: 7,
+    marginTop: 10,
+    width: '80%',
 
   },
 
   text: {
-    alignSelf: "flex-start",  
     color: 'white',
 
     textTransform: 'uppercase',
     fontSize: 16,
     fontWeight: 'bold',
+    justifyContent: 'center',
   },
 });
 
@@ -29,7 +43,7 @@ type PrimaryButtonProps = {
 };
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({  disabled, children, onPress }) => {
   return (
-    <TouchableOpacity disabled={disabled}  style={styles.buttoncontainer} onPress={onPress}>
+    <TouchableOpacity disabled={disabled}  style={disabled ? styles.buttoncontainerdisabled : styles.buttoncontainer} onPress={onPress}>
       <Text  disabled={disabled} style={styles.text}>{children}</Text>
     </TouchableOpacity>
   );

@@ -8,8 +8,8 @@ type TextFieldProps = {
 
 const styles = StyleSheet.create({
   textinputcontainer: {
-    paddingHorizontal: 5,
-    paddingVertical: 5,
+    paddingHorizontal: 50,
+    paddingVertical: 50,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     borderRadius: 10,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   textinput: {
     fontSize: 16,
-    minWidth: 100,
+    flex: 1,
     minHeight: 30,
 
     color: "#333",    

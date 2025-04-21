@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     gap: 5,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%',
   }
 });
 
